@@ -1,16 +1,20 @@
 let nameInput = document.getElementById('name');
 let otherJobRoleInput = document.getElementById('other-title');
 const jobRoleOptions = document.getElementById('title');
+const otherOption = document.querySelector('option[value="other"]');
 
 nameInput.focus();
 
-//otherJobRoleInput.setAttribute('hidden', true);
+const showOtherJobInput = () => {
+    otherJobRoleInput.style.display = 'none';
 
-for (let i = 0; i < jobRoleOptions.length; i++) {
-    jobRoleOptions.addEventListener('change', (e) =>{
-    console.log(e.target[i]);
-
-});
+    jobRoleOptions.addEventListener('input', (e) => {
+        if(e.target.value !== 'other'){
+            otherJobRoleInput.style.display = 'none';
+        } else if(e.target.value === 'other'){
+            otherJobRoleInput.style.display = '';
+        }
+    }); 
 }
 
-
+showOtherJobInput();
