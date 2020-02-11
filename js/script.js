@@ -61,7 +61,7 @@ const showHeartJs = () => {
         colorOptions[i].style.display = 'block';
     }
     
-
+    colorOptions.selectedIndex = '3';
     selectDesignFirstOption.style.display = 'none'
 }
 
