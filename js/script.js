@@ -41,24 +41,26 @@ const hideColors = () => {
 hideColors();
 
 const showJsPuns = () => {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < colorOptions.length; i++) {
+        if(i < 3){
         colorOptions[i].style.display = 'block';
+        } else {
+            colorOptions[i].style.display = 'none';
+        }
     }
-    
-    for (let i = 0; i > 3; i++) {
-        colorOptions[i].style.display = 'none';
-    }
+
     colorOptions.selectedIndex = '0';
     selectDesignFirstOption.style.display = 'none'
 }
 
 const showHeartJs = () => {
        
-    for (let i = 0; i < 3; i++) {
-        colorOptions[i].style.display = 'none';
-    }
-    for (let i = 0; i > 3; i++) {
+    for (let i = 0; i < colorOptions.length; i++) {
+       if(i >= 3){
         colorOptions[i].style.display = 'block';
+       } else{
+        colorOptions[i].style.display = 'none';
+       }
     }
     
     colorOptions.selectedIndex = '3';
