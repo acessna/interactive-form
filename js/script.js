@@ -92,7 +92,7 @@ const showThemeOptions = () => {
 }
 showThemeOptions();
 
-//const showActivities = () => {
+const showActivities = () => {
     document.querySelector('.activities').addEventListener('change', (e) =>{
         let checkedBox = e.target;
         let checkedBoxTime = checkedBox.getAttribute('data-day-and-time');
@@ -102,9 +102,9 @@ showThemeOptions();
 
             if(boxTime === checkedBoxTime && checkedBox !== activityList[i]){
                 if(checkedBox.clicked){
-                    activityList[i].disabled = 'true';
+                    activityList[i].disabled = true;
                 } else {
-                    activityList[i].disabled = 'false';
+                    activityList[i].disabled = false;
                 }
             }
 
@@ -112,8 +112,10 @@ showThemeOptions();
         
     });
 
-//}
-//showActivities();
+}
+showActivities();
+
+
 
 
 
