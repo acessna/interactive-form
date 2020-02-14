@@ -4,6 +4,8 @@ const jobRoleOptions = document.getElementById('title');
 const colorOptions = document.getElementById('color');
 const designOptions = document.getElementById('design');
 const selectDesignFirstOption = document.createElement('option');
+const activityList = document.querySelectorAll(".activities input");
+
 
 
 
@@ -40,6 +42,8 @@ const hideColors = () => {
 
 hideColors();
 
+/* The showJsPuns function loops through the colorOptions and shows only the JS Pun shirt colors when that theme is selected */
+
 const showJsPuns = () => {
     for (let i = 0; i < colorOptions.length; i++) {
         if(i < 3){
@@ -52,6 +56,8 @@ const showJsPuns = () => {
     colorOptions.selectedIndex = '0';
     selectDesignFirstOption.style.display = 'none'
 }
+
+/* The showHeartJs function loops through the colorOptions and shows only the Heart JS colors when that theme is selected */
 
 const showHeartJs = () => {
        
@@ -66,6 +72,8 @@ const showHeartJs = () => {
     colorOptions.selectedIndex = '3';
     selectDesignFirstOption.style.display = 'none'
 }
+
+/* The showThemeOptions function shows the appropriate colorOptions based on which Theme option is selected */
 
 const showThemeOptions = () => {
     let selectThemeOption = designOptions[0];
@@ -83,3 +91,29 @@ const showThemeOptions = () => {
 
 }
 showThemeOptions();
+
+//const showActivities = () => {
+    document.querySelector('.activities').addEventListener('change', (e) =>{
+        let checkedBox = e.target;
+        let checkedBoxTime = checkedBox.getAttribute('data-day-and-time');
+
+        for (let i = 0; i < activityList.length; i++) {
+        let boxTime = activityList[i].getAttribute('data-day-and-time');
+
+            if(boxTime === checkedBoxTime && checkedBox !== activityList[i]){
+                if(checkedBox.clicked){
+                    activityList[i].disabled = 'true';
+                } else {
+                    activityList[i].disabled = 'false';
+                }
+            }
+
+        }  
+        
+    });
+
+//}
+//showActivities();
+
+
+
