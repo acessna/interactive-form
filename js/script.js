@@ -95,18 +95,15 @@ showThemeOptions();
 const showActivities = () => {
     document.querySelector('.activities').addEventListener('change', (e) =>{
         let checkedBox = e.target;
-        console.log('event');
         let checkedBoxTime = checkedBox.getAttribute('data-day-and-time');
 
         for (let i = 0; i < activityList.length; i++) {
         let boxTime = activityList[i].getAttribute('data-day-and-time');
-        console.log('condition');
+
         if(boxTime === checkedBoxTime && checkedBox !== activityList[i]){
                 if(checkedBox.checked === true){
-                    console.log('if');
                     activityList[i].disabled = true;
                 } else if(checkedBox.checked === false) {
-                    console.log('else');
                     activityList[i].disabled = false;
                 }
             }
