@@ -5,7 +5,9 @@ const colorOptions = document.getElementById('color');
 const designOptions = document.getElementById('design');
 const selectDesignFirstOption = document.createElement('option');
 const activityList = document.querySelectorAll(".activities input");
-
+let activitiesTotalCost = 0;
+let displayTotal = document.createElement('p');
+const activities = document.querySelector('.activities');
 
 
 
@@ -92,6 +94,10 @@ const showThemeOptions = () => {
 }
 showThemeOptions();
 
+/* 
+showActivies loops through the activity checkboxes.
+When one is selected, it deactivates any conflicting activities.
+*/
 const showActivities = () => {
     document.querySelector('.activities').addEventListener('change', (e) =>{
         let checkedBox = e.target;
@@ -109,11 +115,30 @@ const showActivities = () => {
             }
 
         }  
-        
     });
 
 }
 showActivities();
+
+
+const activitiesSum = () => {
+    document.querySelector('.activities').addEventListener('change', (e) =>{
+        let checkedBox = e.target;
+        let eventCost = parseInt(checkedBox.getAttribute('data-cost'));
+
+            if(checkedBox.checked === true){
+                activitiesTotalCost += eventCost;
+            } else if(checkedBox.checked === false) {
+                activitiesTotalCost -= eventCost;
+            }      
+            displayTotal.innerHTML = 'Total: $' + activitiesTotalCost;
+
+    });
+
+    activities.appendChild(displayTotal);
+}
+
+activitiesSum();
 
 
 
