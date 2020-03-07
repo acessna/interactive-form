@@ -8,6 +8,10 @@ const activityList = document.querySelectorAll(".activities input");
 let activitiesTotalCost = 0;
 let displayTotal = document.createElement('p');
 const activities = document.querySelector('.activities');
+const paymentOptions = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const paypal = document.getElementById('paypal');
+const bitcoin = document.getElementById('bitcoin');
 
 
 
@@ -120,7 +124,8 @@ const showActivities = () => {
 }
 showActivities();
 
-
+/* activitiesSum adds up the total cost of the activites based on
+what activity boxes are selected */
 const activitiesSum = () => {
     document.querySelector('.activities').addEventListener('change', (e) =>{
         let checkedBox = e.target;
@@ -140,6 +145,38 @@ const activitiesSum = () => {
 
 activitiesSum();
 
+/* showPaymentMethod shows the proper information/input fields for 
+the payment option that is selected */
+const showPaymentMethod = () => {
+    creditCard.style.display = 'none';
+    paypal.style.display = 'none';
+    bitcoin.style.display = 'none';
+
+    paymentOptions.addEventListener('input', (e) => {
+        if(e.target.value === 'credit card'){
+            creditCard.style.display = 'block';
+            paypal.style.display = 'none';
+            bitcoin.style.display = 'none';
+        } else if(e.target.value === 'bitcoin'){
+            creditCard.style.display = 'none';
+            paypal.style.display = 'none';
+            bitcoin.style.display = 'block';
+        } else if(e.target.value === 'paypal'){
+            creditCard.style.display = 'none';
+            paypal.style.display = 'block';
+            bitcoin.style.display = 'none';
+        } else if(e.target.value === 'select method'){
+            creditCard.style.display = 'none';
+            paypal.style.display = 'none';
+            bitcoin.style.display = 'none';
+        }
+
+    });
+
+    
+}
+
+showPaymentMethod();
 
 
 
