@@ -12,7 +12,10 @@ const paymentOptions = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
 const paypal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
-
+const form = document.querySelector('form');
+let mailInput = document.getElementById('mail');
+const activitySection = document.querySelector('.activities');
+const activityErrorMessage = document.createElement('p');
 
 
 nameInput.focus();
@@ -178,6 +181,69 @@ const showPaymentMethod = () => {
 
 showPaymentMethod();
 
+const nameVerification = () => {
+    let nameValue = nameInput.value;
+
+    if(nameValue.length > 0){
+        console.log('if');
+        nameInput.style.border = '#FFFFFF';
+        return true;
+    } else{
+        console.log('else');
+        nameInput.style.border = 'thick solid #F93106';
+        nameInput.placeholder = '**Please enter valid name**'
+        return false;
+    }
+}
+
+const emailVerification = () => {
+    let emailValue = mailInput.value;
+    let atLocation = emailValue.indexOf('@');
+    let periodLoc = emailValue.lastIndexOf('.');
+
+    if((atLocation > 1) && (periodLoc > atLocation +1)){
+        mailInput.style.border = 'white';
+        return true;
+    } else{
+        mailInput.style.border = 'thick solid #F93106';
+        mailInput.placeholder = '**Please enter valid email**';
+    }
+
+}
+
+const activityVerification = () => {
+    for(let i = 0; i < activityList.length; i++){
+        if(activityList[i].checked){
+            activitySection.style.border = 'white';
+            return true;
+        }
+    }
+    activitySection.style.color = '#F93106';
+    activityErrorMessage.innerHTML = '**Please select at least one activity**'
+    activitySection.appendChild(activityErrorMessage);
+    return false;
+}
+
+
+form.addEventListener('submit', (e) => {
+nameVerification();
+if(!nameVerification()){
+    e.preventDefault();
+}
+
+emailVerification();
+if(!emailVerification()){
+    e.preventDefault();
+}
+
+activityVerification();
+if(!activityVerification()){
+    e.preventDefault();
+}
+
+e.preventDefault();
+
+});
 
 
 
