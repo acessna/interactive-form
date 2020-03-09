@@ -25,6 +25,7 @@ const ccErrorMessage = document.createElement('p');
 
 nameInput.focus();
 
+
 /* The showOtherJobInput method displays the otherJobRoleInput when
 the 'other' option is selected in the Job Role selector */
 
@@ -156,11 +157,10 @@ activitiesSum();
 /* showPaymentMethod shows the proper information/input fields for 
 the payment option that is selected */
 const showPaymentMethod = () => {
-    creditCard.style.display = 'none';
     paypal.style.display = 'none';
     bitcoin.style.display = 'none';
 
-    paymentOptions.addEventListener('input', (e) => {
+    paymentOptions.addEventListener('change', (e) => {
         if(e.target.value === 'credit card'){
             creditCard.style.display = 'block';
             paypal.style.display = 'none';
@@ -181,10 +181,15 @@ const showPaymentMethod = () => {
 
     });
 
+    paymentOptions.selectedIndex = '1';
+
     
 }
 
 showPaymentMethod();
+
+/* The four functions below verify that the information input from
+the users is valid */
 
 const nameVerification = () => {
     let nameValue = nameInput.value;
@@ -242,24 +247,29 @@ const creditCardVerification = () => {
                 creditCardInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106'; 
+            } else{
+                return true;
             }
             if(zipRegex.test(zipValue) === false){
                 zipInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106';
+            } else{
+                return true;
             }
             if(cvvRegex.test(cvvValue) === false){
                 cvvInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106';
+            } else{
+                return true;
             }
 
-    } else{
-        return true;
     }
 
 }
 
+/* The event listener below runs the verification functions when the user submits the form */
 
 form.addEventListener('submit', (e) => {
 nameVerification();
