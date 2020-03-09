@@ -16,6 +16,11 @@ const form = document.querySelector('form');
 let mailInput = document.getElementById('mail');
 const activitySection = document.querySelector('.activities');
 const activityErrorMessage = document.createElement('p');
+let creditCardInput = document.getElementById('cc-num');
+let zipInput = document.getElementById('zip');
+let cvvInput = document.getElementById('cvv');
+const ccErrorMessage = document.createElement('p');
+
 
 
 nameInput.focus();
@@ -185,11 +190,9 @@ const nameVerification = () => {
     let nameValue = nameInput.value;
 
     if(nameValue.length > 0){
-        console.log('if');
         nameInput.style.border = '#FFFFFF';
         return true;
     } else{
-        console.log('else');
         nameInput.style.border = 'thick solid #F93106';
         nameInput.placeholder = '**Please enter valid name**'
         return false;
@@ -224,6 +227,39 @@ const activityVerification = () => {
     return false;
 }
 
+const creditCardVerification = () => {
+    let creditCardValue = creditCardInput.value;
+    let zipValue = zipInput.value;
+    let cvvValue = cvvInput.value;
+    ccErrorMessage.innerHTML = '**Credit Card information is not valid**'
+
+    let ccRegex = /^\d{13,16}$/;
+    let zipRegex = /^\d{5}$/;
+    let cvvRegex = /^\d{3}$/;
+
+    if(paymentOptions.value === 'credit card'){
+            if(ccRegex.test(creditCardValue) === false){
+                creditCardInput.style.border = 'solid #F93106';
+                creditCard.appendChild(ccErrorMessage);
+                ccErrorMessage.style.color = '#F93106'; 
+            }
+            if(zipRegex.test(zipValue) === false){
+                zipInput.style.border = 'solid #F93106';
+                creditCard.appendChild(ccErrorMessage);
+                ccErrorMessage.style.color = '#F93106';
+            }
+            if(cvvRegex.test(cvvValue) === false){
+                cvvInput.style.border = 'solid #F93106';
+                creditCard.appendChild(ccErrorMessage);
+                ccErrorMessage.style.color = '#F93106';
+            }
+
+    } else{
+        return true;
+    }
+
+}
+
 
 form.addEventListener('submit', (e) => {
 nameVerification();
@@ -241,7 +277,10 @@ if(!activityVerification()){
     e.preventDefault();
 }
 
-e.preventDefault();
+creditCardVerification();
+if(!creditCardVerification()){
+    e.preventDefault();
+}
 
 });
 
