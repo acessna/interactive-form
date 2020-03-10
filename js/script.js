@@ -287,9 +287,11 @@ if(!activityVerification()){
     e.preventDefault();
 }
 
-creditCardVerification();
-if(!creditCardVerification()){
-    e.preventDefault();
+if(paymentOptions.value = 'credit card'){
+    creditCardVerification();
+    if(!creditCardVerification()){
+        e.preventDefault();
+    }
 }
 
 });
