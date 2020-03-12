@@ -251,26 +251,16 @@ const paymentVerification = () => {
     }
 
     if(paymentOptions.value === 'credit card'){
-            if(ccRegex.test(creditCardValue) === false || creditCardValue === ''){
+            if((ccRegex.test(creditCardValue) === false || creditCardValue === '') || (zipRegex.test(zipValue) === false || zipValue === '') ||(cvvRegex.test(cvvValue) === false || cvvValue === '')){
                 creditCardInput.style.border = 'solid #F93106';
+                zipInput.style.border = 'solid #F93106';
+                cvvInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106'; 
                 return false;
-            } 
-            
-            if(zipRegex.test(zipValue) === false || zipValue === ''){
-                zipInput.style.border = 'solid #F93106';
-                creditCard.appendChild(ccErrorMessage);
-                ccErrorMessage.style.color = '#F93106';
-                return false;
-            } 
-            
-            if(cvvRegex.test(cvvValue) === false || cvvValue === ''){
-                cvvInput.style.border = 'solid #F93106';
-                creditCard.appendChild(ccErrorMessage);
-                ccErrorMessage.style.color = '#F93106';
-                return false;
-            } 
+            } else {
+                return true;
+            }
     } 
 }
 
