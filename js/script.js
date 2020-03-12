@@ -232,7 +232,7 @@ const activityVerification = () => {
     return false;
 }
 
-const creditCardVerification = () => {
+const paymentVerification = () => {
     let creditCardValue = creditCardInput.value;
     let zipValue = zipInput.value;
     let cvvValue = cvvInput.value;
@@ -242,32 +242,39 @@ const creditCardVerification = () => {
     let zipRegex = /^\d{5}$/;
     let cvvRegex = /^\d{3}$/;
 
+    if(paymentOptions.value === 'bitcoin'){
+        return true;
+    }
+
+    if(paymentOptions.value === 'paypal'){
+        return true;
+    }
+
     if(paymentOptions.value === 'credit card'){
-            if(ccRegex.test(creditCardValue) === false){
+            if(ccRegex.test(creditCardValue) === false || creditCardValue === ''){
                 creditCardInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106'; 
-            } else{
-                return true;
-            }
-            if(zipRegex.test(zipValue) === false){
+                return false;
+            } 
+            
+            if(zipRegex.test(zipValue) === false || zipValue === ''){
                 zipInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106';
-            } else{
-                return true;
-            }
-            if(cvvRegex.test(cvvValue) === false){
+                return false;
+            } 
+            
+            if(cvvRegex.test(cvvValue) === false || cvvValue === ''){
                 cvvInput.style.border = 'solid #F93106';
                 creditCard.appendChild(ccErrorMessage);
                 ccErrorMessage.style.color = '#F93106';
-            } else{
-                return true;
-            }
-
-    }
-
+                return false;
+            } 
+    } 
 }
+
+
 
 /* The event listener below runs the verification functions when the user submits the form */
 
@@ -287,12 +294,11 @@ if(!activityVerification()){
     e.preventDefault();
 }
 
-if(paymentOptions.value = 'credit card'){
-    creditCardVerification();
-    if(!creditCardVerification()){
-        e.preventDefault();
-    }
-}
+paymentVerification();
+if(!paymentVerification()){
+     e.preventDefault();
+ }
+
 
 });
 
